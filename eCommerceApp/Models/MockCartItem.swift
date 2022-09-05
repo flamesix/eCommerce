@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MockCartItem: Decodable, Identifiable {
+struct MockCartItem: Decodable, Identifiable, Equatable {
     let id: Int
     let image: String
     let price: Int

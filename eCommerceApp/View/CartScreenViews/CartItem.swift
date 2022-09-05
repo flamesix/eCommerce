@@ -13,6 +13,9 @@ struct CartItem: View {
     let mockCartTitle: String
     let mockCartPrice: Int
     
+    let mockCartItem: MockCartItem
+    @Binding var mockCartItems: [MockCartItem]
+    let onDelete: (IndexSet) -> ()
     
     var body: some View {
         HStack {
@@ -41,7 +44,9 @@ struct CartItem: View {
             CartStepper()
             
             Button {
-                
+                if let index = mockCartItems.firstIndex(of: mockCartItem) {
+                    onDelete(IndexSet(integer: index))
+                }
             } label: {
                 Image("trashLogo")
                     .foregroundColor(.white)
@@ -51,12 +56,12 @@ struct CartItem: View {
     }
 }
 
-struct CartItem_Previews: PreviewProvider {
-    
-    static let mockCart: MockCart = Bundle.main.decode(mockCartURL)
-    
-    static var previews: some View {
-        CartItem(mockCartImage: mockCart.cart[0].image, mockCartTitle: mockCart.cart[0].title, mockCartPrice: mockCart.cart[0].price)
-            .background(darkColor)
-    }
-}
+//struct CartItem_Previews: PreviewProvider {
+//    
+//    static let mockCart: MockCart = Bundle.main.decode(mockCartURL)
+//    
+//    static var previews: some View {
+//        CartItem(mockCartImage: mockCart.cart[0].image, mockCartTitle: mockCart.cart[0].title, mockCartPrice: mockCart.cart[0].price)
+//            .background(darkColor)
+//    }
+//}
